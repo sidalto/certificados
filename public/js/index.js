@@ -18,12 +18,21 @@ formEditar.onsubmit = event => {
 	}
 };
 
+function evitaSubmitFormImprimir () {
+	const formImprimir = document.getElementById('form-imprimir');
+	formImprimir.onsubmit = event => {
+		event.preventDefault();
+	}
+}
+
 function excluir (id) {
+	evitaSubmitFormImprimir();
+
     fetch(`http://localhost:3000/excluir/${id}`, {
       method: 'DELETE'
     })
     .then(() => {
-        const tr = document.getElementById('tr' + id);
+		const tr = document.getElementById('tr' + id);
         tr.remove();
     }).catch(erro => {
         console.error(erro);
@@ -58,6 +67,7 @@ function inserirAluno (aluno) {
     const { id, nome, data_inicio, data_fim } = JSON.parse(aluno); 
     const tbody = document.querySelector('tbody');
     const tr = document.createElement('tr');
+    const tdImprimir = document.createElement('td');
     const tdId = document.createElement('td');
     const tdNome = document.createElement('td');
     const tdDataInicio = document.createElement('td');
@@ -76,6 +86,13 @@ function inserirAluno (aluno) {
     botaoExcluir.setAttribute('onclick', `excluir(${id})`);
     botaoExcluir.appendChild(document.createTextNode('Excluir'));
 
+	const imprimir = document.createElement('input');
+	imprimir.setAttribute('type', 'checkbox');
+	imprimir.setAttribute('name', 'marcar');
+	imprimir.setAttribute('id', id);
+	imprimir.setAttribute('value', id);
+
+    tdImprimir.appendChild(imprimir);
     tdId.appendChild(document.createTextNode(id));
     tdNome.appendChild(document.createTextNode(nome));
     tdDataInicio.appendChild(document.createTextNode(data_inicio));
@@ -84,12 +101,14 @@ function inserirAluno (aluno) {
     tdAcao.appendChild(botaoExcluir);
 
     tr.setAttribute('id', `tr${id}`); 
+    tdImprimir.className = 'table-light';
     tdId.className = 'table-light';
     tdNome.className = 'table-light';
     tdDataInicio.className = 'table-light';
     tdDataFim.className = 'table-light';
     tdAcao.className = 'table-light';
 
+    tr.appendChild(tdImprimir);
     tr.appendChild(tdId);
     tr.appendChild(tdNome);
     tr.appendChild(tdDataInicio);
@@ -99,6 +118,7 @@ function inserirAluno (aluno) {
 }
 
 function editar (id) {
+	evitaSubmitFormImprimir();
 	getAluno(id);
 }
 
@@ -180,7 +200,8 @@ function getAluno (id) {
 function atualizarAluno (aluno) {
 	const { id, nome, data_inicio, data_fim } = JSON.parse(aluno);
 	const tr = document.getElementById(`tr${id}`);
-	tr.children[1].innerHTML = nome;
-	tr.children[2].innerHTML = data_inicio;
-	tr.children[3].innerHTML = data_fim;
+	tr.children[0].value = id;
+	tr.children[2].innerHTML = nome;
+	tr.children[3].innerHTML = data_inicio;
+	tr.children[4].innerHTML = data_fim;
 }
