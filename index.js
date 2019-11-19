@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-const dados = require('./dados.json');
 
 const app = express();
 const porta = 3000;
