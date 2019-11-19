@@ -53,6 +53,19 @@ function excluir (req, res) {
         .catch(erro => console.log(erro));
 }
 
+function imprimir (req, res) {
+    let alunosMarcados = req.body.marcar;
+    alunosMarcados = JSON.stringify(alunosMarcados);
+
+    Aluno.getAlunos()
+        .then(alunos => {
+            // const testealunos = alunos.find((aluno, i) => aluno[i] === alunosMarcados[i]);
+            alunos = alunos.filter(aluno => alunosMarcados.includes(aluno.id));
+            res.render('../views/impressao.ejs', { alunos });
+        })
+        .catch(erro => console.log(erro));
+}
+
 module.exports = {
     getAlunos,
     getAluno,
@@ -60,5 +73,6 @@ module.exports = {
     inserir,
     editar,
     atualizar,
-    excluir
+    excluir,
+    imprimir
 };

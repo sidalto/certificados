@@ -41,10 +41,42 @@ legend.scheduler-border {
     justify-content: center;
 }
 
+#botao-imprimir {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #novo-aluno {
     display: none;
 }
 
 #editar-aluno {
     display: none;
+}
+
+.folha { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccc; 
+    padding: 0.5em; 
+    margin: auto;
+
+}
+
+.a4_vertical { 
+    width: 793px; 
+    height: 1122px; 
+
+}
+
+.a4_horizontal { 
+    width: 1122px; 
+    height: 793px; 
+    margin-bottom: 10px;
+}
+
+.no-print { 
+    display: none; 
 }

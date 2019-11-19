@@ -1,11 +1,11 @@
 const formNovo = document.getElementById('form-novo');
-formNovo.onsubmit = function (event) {
+formNovo.onsubmit = event => {
 	event.preventDefault();
 	salvar();
 };
 
 const formEditar = document.getElementById('form-editar');
-formEditar.onsubmit = function (event) {
+formEditar.onsubmit = event => {
 	event.preventDefault();
 	atualizar();
 	document.getElementById('editar-aluno').style.display = 'none';

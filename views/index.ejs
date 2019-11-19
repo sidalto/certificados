@@ -76,31 +76,40 @@
 		</div>
         <h3>Relação de Alunos</h3>
         <br>
-        <table class="table table-sm table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" style="width: 20%;">ID</th>
-                    <th scope="col" style="width: 20%;">Nome do Aluno</th>
-                    <th scope="col" style="width: 20%;">Data de Início</th>
-                    <th scope="col" style="width: 20%;">Data de Conclusão</th>
-                    <th scope="col" style="width: 20%;"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (let aluno of alunos) { %>
-                    <tr id="tr<%= aluno.id %>">
-                        <td class="table-light"><%= aluno.id %></td>
-                        <td class="table-light"><%= aluno.nome %></td>
-                        <td class="table-light"><%= aluno.data_inicio %></td>
-                        <td class="table-light"><%= aluno.data_fim %></td>
-                        <td class="table-light">
-                            <button class="btn btn-sm btn-warning" onclick=<%= `editar(${aluno.id})` %> >Editar</button>
-                            <button class="btn btn-sm btn-danger" onclick=<%= `excluir(${aluno.id})` %> >Excluir</button>
-                        </td>
-                    </tr>           
-                <% } %>
-            </tbody>
-        </table>
+        <div id="imprimir-aluno" >
+            <form action="/imprimir" method="post" name="form-imprimir" class="form">
+                <table class="table table-sm table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" style="width: 5%;">Imprimir</th>
+                            <th scope="col" style="width: 5%;">ID</th>
+                            <th scope="col" style="width: 34%;">Nome do Aluno</th>
+                            <th scope="col" style="width: 20%;">Data de Início</th>
+                            <th scope="col" style="width: 20%;">Data de Conclusão</th>
+                            <th scope="col" style="width: 12%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let aluno of alunos) { %>
+                            <tr id="tr<%= aluno.id %>">
+                                <td class="table-light"><input type="checkbox" name="marcar" id="marcar" value=<%= aluno.id %> ></td>
+                                <td class="table-light"><%= aluno.id %></td>
+                                <td class="table-light"><%= aluno.nome %></td>
+                                <td class="table-light"><%= aluno.data_inicio %></td>
+                                <td class="table-light"><%= aluno.data_fim %></td>
+                                <td class="table-light">
+                                    <button class="btn btn-sm btn-warning" onclick=<%= `editar(${aluno.id})` %> >Editar</button>
+                                    <button class="btn btn-sm btn-danger" onclick=<%= `excluir(${aluno.id})` %> >Excluir</button>
+                                </td>
+                            </tr>           
+                        <% } %>
+                    </tbody>
+                </table>
+                <div id="botao-imprimir">
+                    <button id="imprimir" class="btn btn-primary btn-md">Imprimir</button>
+                </div>
+            </form>
+        </div>
     </div>
     <%- include partials/footer.ejs %>
 </body>
