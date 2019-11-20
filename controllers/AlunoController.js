@@ -5,7 +5,7 @@ function getAlunos(res, res) {
     .then(alunos => {
       res.render('../views/index.ejs', { alunos });
     })
-    .catch(erro => console.log(erro));
+    .catch(erro => res.render('../views/index.ejs', { erro }));
 }
 
 function getAluno(req, res) {
@@ -17,20 +17,12 @@ function getAluno(req, res) {
     .catch(erro => console.log(erro));
 }
 
-function criar(req, res) {
-  res.render('../views/create.ejs');
-}
-
 function inserir(req, res) {
   Aluno.insertAluno(req.body)
     .then(aluno => {
       res.send(aluno);
     })
     .catch(erro => console.log(erro));
-}
-
-function editar(req, res) {
-  res.render('../views/edit.ejs');
 }
 
 function atualizar(req, res) {
@@ -59,7 +51,6 @@ function imprimir(req, res) {
 
   Aluno.getAlunos()
     .then(alunos => {
-      // const testealunos = alunos.find((aluno, i) => aluno[i] === alunosMarcados[i]);
       alunos = alunos.filter(aluno => alunosMarcados.includes(aluno.id));
       res.render('../views/impressao.ejs', { alunos });
     })
@@ -69,9 +60,7 @@ function imprimir(req, res) {
 module.exports = {
   getAlunos,
   getAluno,
-  criar,
   inserir,
-  editar,
   atualizar,
   excluir,
   imprimir

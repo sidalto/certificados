@@ -1,22 +1,28 @@
-const formNovo = document.getElementById('form-novo');
-formNovo.onsubmit = event => {
-	event.preventDefault();
-	salvar();
-};
+(function submitFormNovo() {
+	const formNovo = document.getElementById('form-novo');
+	formNovo.addEventListener('submit', event => {
+		event.preventDefault();
+		salvar();
+	});
+})();
 
-const formEditar = document.getElementById('form-editar');
-formEditar.onsubmit = event => {
-	event.preventDefault();
-	atualizar();
-	document.getElementById('editar-aluno').style.display = 'none';
-	const display = document.getElementById('novo').style.display;
+(function submitFormEditar() {
+	const formEditar = document.getElementById('form-editar');
+	formEditar.addEventListener('submit', event => {
+		event.preventDefault();
+		atualizar();
 
-	if (display == 'block') {
-		document.getElementById('novo').style.display = 'none';
-	} else {
-		document.getElementById('novo').style.display = 'block';
-	}
-};
+		document.getElementById('editar-aluno').style.display = 'none';
+
+		const display = document.getElementById('novo').style.display;
+
+		if (display == 'block') {
+			document.getElementById('novo').style.display = 'none';
+		} else {
+			document.getElementById('novo').style.display = 'block';
+		}
+	});
+})();
 
 function evitaSubmitFormImprimir() {
 	const formImprimir = document.getElementById('form-imprimir');
@@ -65,6 +71,11 @@ function salvar() {
 
 function inserirAluno(aluno) {
 	const { id, nome, data_inicio, data_fim } = JSON.parse(aluno);
+
+	document.getElementById('nome').value = '';
+	document.getElementById('data_inicio').value = '';
+	document.getElementById('data_fim').value = '';
+
 	const tbody = document.querySelector('tbody');
 	const tr = document.createElement('tr');
 	const tdImprimir = document.createElement('td');
@@ -115,6 +126,11 @@ function inserirAluno(aluno) {
 	tr.appendChild(tdDataFim);
 	tr.appendChild(tdAcao);
 	tbody.appendChild(tr);
+
+	const trNenhum = document.getElementById('nenhum');
+	if (trNenhum !== null) {
+		trNenhum.remove();
+	}
 }
 
 function editar(id) {

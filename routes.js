@@ -4,9 +4,7 @@ const routes = express.Router();
 
 routes.get('/', AlunoController.getAlunos);
 routes.get('/aluno/:id', AlunoController.getAluno);
-routes.get('/criar', AlunoController.criar);
 routes.post('/inserir', AlunoController.inserir);
-routes.get('/editar', AlunoController.editar);
 routes.put('/atualizar/:id', AlunoController.atualizar);
 routes.delete('/excluir/:id', AlunoController.excluir);
 routes.post('/imprimir', AlunoController.imprimir);

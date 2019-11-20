@@ -34,7 +34,7 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label for="salvar">&nbsp;</label>
-                <button id="salvar" class="form-control btn btn-primary">Salvar</button>
+                <button id="salvar" class="form-control btn btn-primary btn-md">Salvar</button>
               </div>
             </div>
           </div>
@@ -91,6 +91,11 @@
             </tr>
           </thead>
           <tbody>
+            <% if (typeof alunos === 'undefined') { %>
+            <tr id="nenhum">
+              <td colspan="6" class="table-light"><%= erro.mensagem %></td>
+            </tr>
+            <% } else { %>
             <% for (let aluno of alunos) { %>
             <tr id="tr<%= aluno.id %>">
               <td class="table-light"><input type="checkbox" name="marcar" id=<%= aluno.id %> value=<%= aluno.id %>>
@@ -104,6 +109,7 @@
                 <button class="btn btn-sm btn-danger" onclick=<%= `excluir(${aluno.id})` %>>Excluir</button>
               </td>
             </tr>
+            <% } %>
             <% } %>
           </tbody>
         </table>

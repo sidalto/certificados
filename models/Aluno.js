@@ -6,7 +6,7 @@ function getAlunos() {
   return new Promise((resolve, reject) => {
     if (alunos.length === 0) {
       reject({
-        mensagem: 'nenhum aluno disponível',
+        mensagem: 'Nenhum aluno cadastrado',
         status: 202
       });
     }
