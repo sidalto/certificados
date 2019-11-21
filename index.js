@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const routes = require('./routes');
 
 const app = express();
@@ -7,8 +6,8 @@ const porta = 3000;
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 app.use(routes);
 
