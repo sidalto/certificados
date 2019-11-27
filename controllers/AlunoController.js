@@ -46,15 +46,18 @@ function excluir(req, res) {
 }
 
 function imprimir(req, res) {
-  let alunosMarcados = req.body.marcar;
-  alunosMarcados = JSON.stringify(alunosMarcados);
-
-  Aluno.getAlunos()
-    .then(alunos => {
-      alunos = alunos.filter(aluno => alunosMarcados.includes(aluno.id));
-      res.render('../views/impressao.ejs', { alunos });
-    })
-    .catch(erro => console.log(erro));
+  if (req.body.marcar !== undefined) {
+    let alunosMarcados = req.body.marcar;
+    alunosMarcados = JSON.stringify(alunosMarcados);
+    Aluno.getAlunos()
+      .then(alunos => {
+        alunos = alunos.filter(aluno => alunosMarcados.includes(aluno.id));
+        res.render('../views/impressao.ejs', { alunos });
+      })
+      .catch(erro => console.log(erro));
+  } else {
+    res.render('../views/impressao.ejs', { mensagem: 'Nenhum aluno selecionado para impressão' });
+  }
 }
 
 module.exports = {

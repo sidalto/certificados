@@ -1,18 +1,27 @@
 <%- include partials/header.ejs %>
-<link rel="stylesheet" type="text/css" href="/print.css" media="print" />
 
 <body>
   <%- include partials/navbar.ejs %>
-  <br>
   <h3 class="no-print">Relação de Certificados para Impressão</h3>
-  <% for (let aluno of alunos) { %>
-  <div id=<%= `folha-aluno-${aluno.id}` %> class="folha a4_horizontal">
-    <div id=<%= `conteudo-aluno-${aluno}` %>>
-      <%= aluno.nome %>
-      <%= aluno.data_inicio %>
-      <%= aluno.data_fim %>
+  <% if (typeof mensagem === 'undefined') { %>
+    <% for (let aluno of alunos) { %>
+    <div id=<%= `folha-aluno-${aluno.id}` %> class="folha a4_horizontal">
+      <div id=<%= `conteudo-aluno-${aluno}` %>>
+        <div class="nome-aluno">
+          <%= aluno.nome %>
+        </div>
+        <div class="periodo">
+          <%= aluno.data_inicio %> à 
+          <%= aluno.data_fim %>
+        </div>
+      </div>
     </div>
-  </div>
+    <% } %>
+  <% } else { %>
+    <h3><%= mensagem %></h3>
+    <div id="botao-imprimir">
+      <a class="botao-voltar btn btn-md btn-primary" href="/">Voltar</a>
+    </div>
   <% } %>
   <%- include partials/footer.ejs %>
 </body>
