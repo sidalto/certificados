@@ -56,7 +56,9 @@ function imprimir(req, res) {
       })
       .catch(erro => console.log(erro));
   } else {
-    res.render('../views/impressao.ejs', { mensagem: 'Nenhum aluno selecionado para impressão' });
+    res.render('../views/impressao.ejs', {
+      mensagem: 'Nenhum aluno selecionado para impressão'
+    });
   }
 }
 

@@ -11,12 +11,13 @@ function getAlunos() {
       });
     }
     resolve(alunos);
-  })
+  });
 }
 
 function getAluno(id) {
   return new Promise((resolve, reject) => {
-    helper.buscaAluno(alunos, id)
+    helper
+      .buscaAluno(alunos, id)
       .then(aluno => resolve(aluno))
       .catch(erro => reject(erro));
   });
@@ -34,7 +35,8 @@ function insertAluno(aluno) {
 
 function updateAluno(id, novoAluno) {
   return new Promise((resolve, reject) => {
-    helper.buscaAluno(alunos, id)
+    helper
+      .buscaAluno(alunos, id)
       .then(aluno => {
         const index = alunos.findIndex(a => a.id == aluno.id);
         id = { id: aluno.id };
@@ -43,12 +45,13 @@ function updateAluno(id, novoAluno) {
         resolve(alunos[index]);
       })
       .catch(erro => reject(erro));
-  })
+  });
 }
 
 function deleteAluno(id) {
   return new Promise((resolve, reject) => {
-    helper.buscaAluno(alunos, id)
+    helper
+      .buscaAluno(alunos, id)
       .then(aluno => {
         alunos = alunos.filter(aluno => aluno.id != id);
         const retorno = helper.escreveJSONFile(nomeArquivo, alunos);

@@ -11,4 +11,6 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(routes);
 
-app.listen(porta, () => { console.log(`Servidor rodando na porta ${porta}`) });
+app.listen(porta, () => {
+  console.log(`Servidor rodando na porta ${porta}`);
+});
